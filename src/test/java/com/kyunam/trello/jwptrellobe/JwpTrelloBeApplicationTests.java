@@ -22,7 +22,6 @@ public class JwpTrelloBeApplicationTests {
 
 	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
     @Autowired private TestRestTemplate template;
-
     @Test
     public void home() {
         ResponseEntity<String> response = template.getForEntity("/", String.class);
