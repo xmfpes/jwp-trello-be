@@ -23,7 +23,24 @@ public class UserController {
 	public String signUpForm() {
 		return "signUp";
 	}
-
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody UserDto userDto){
+		ResponseEntity<?> entity = null;
+		String userId = userDto.getUserId();
+		String password = userDto.getPassword();
+		try {
+			User user = userRepository.findByUserId(userId);
+			if(user == null) {
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}else {
+				entity = user.matchPassword(password);
+			}
+		}catch(Exception e) {
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 	@PostMapping("/api/users")
 	public ResponseEntity<User> create(@RequestBody UserDto newUser) {
 		ResponseEntity<User> entity = null;

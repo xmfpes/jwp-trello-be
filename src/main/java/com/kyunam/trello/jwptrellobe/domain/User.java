@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +29,7 @@ public class User {
 	@Column(nullable = true, length=100)
 	private String email;
 	
+	public User() {}
 	public User(UserDto user) {
 		this.userId = user.getUserId();
 		this.password = user.getPassword();
@@ -35,5 +39,13 @@ public class User {
 		this.userId = userId;
 		this.password = password;
 		this.email = email;
+	}
+	public ResponseEntity<?> matchPassword(String password) {
+		System.out.println("mypassword :" + this.password);
+		System.out.println("password :" + password);
+		if(this.password.equals(password)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 }
