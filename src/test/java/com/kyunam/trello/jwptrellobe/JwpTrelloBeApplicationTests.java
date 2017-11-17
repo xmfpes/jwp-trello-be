@@ -28,5 +28,4 @@ public class JwpTrelloBeApplicationTests {
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         log.debug("body : {}", response.getBody());
     }
-
 }
