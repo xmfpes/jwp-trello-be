@@ -19,6 +19,13 @@ public class UserController {
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	UserRepository userRepository;
+	
+	
+	@GetMapping("/login")
+	public String loginForm() {
+		return "login";
+	}
+	
 	@GetMapping("/signUp")
 	public String signUpForm() {
 		return "signUp";
